@@ -3,49 +3,57 @@
  *
  * CSS for both Frontend+Backend.
  */
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 
+ @media only screen and (max-width: 550px){
+  .artworkContainer{
+    display: grid !important;
+    text-align: center;
+    margin: 0 auto !important;
+    text-align: -webkit-center;
+  }
+  .productionImages{
+    padding: 10px !important;
+    width: 100% !important;
+  }
+}
 .wp-block-cgb-block-uneekproduction-block  {
   background: #fff195;
-  border: 0.2rem solid #1e1e1e;
-  color: $black;
+  border: 0.5rem solid #1e1e1e;
+  color: #1e1e1e;
   margin: 0 auto;
-  max-width: 740px;
   padding: 2rem;
 }
 
 #productionTitle{
-  font-size: 28px;
+  font-size: 80px;
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 70px;
 }
 
-.image-wrapper {
-  position: relative;
+#productionDescription{
+  font-size: 32px;
+  line-height: 100%;
 }
 
-.prodImg{
-  width: 50%;
+
+.productionImages{
+  width: 45%;
+  align-self: flex-start;
 }
 
-button {
+.artworkContainer{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: row;
+  height: 100%;
+}
 
-  &.remove-image {
-
-      background-color: #1e1e1e;
-      border: 2px #1e1e1e solid;
-      padding: 5px 5px 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: .9;
-
-      svg {
-          background: #1e1e1e;
-          fill: white;
-      }
-
-      &:hover {
-          opacity: 1;
-      }
-
-  }
-
+.titleAndFBLink{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
 }

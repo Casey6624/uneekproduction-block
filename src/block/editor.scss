@@ -8,3 +8,39 @@
 /* .wp-block-cgb-block-uneekproduction-block  {
 
 } */
+
+button {
+
+    &.remove-image {
+  
+        background-color: #1e1e1e;
+        border: 2px #1e1e1e solid;
+        padding: 5px 5px 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: .9;
+  
+        svg {
+            background: #1e1e1e;
+            fill: white;
+        }
+  
+        &:hover {
+            opacity: 1;
+        }
+  
+    }
+  
+  }
+  
+.editor-rich-text{
+    border: 0.5px solid black;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#mce_0{
+    text-align: center;
+}

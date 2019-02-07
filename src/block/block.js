@@ -12,6 +12,7 @@ import icons from './icons';
 
 //  Components
 import FacebookLogo from "../SharedComponents/FacebookLogo";
+import GalleryUpload from "../SharedComponents/GalleryUpload";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -76,6 +77,21 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			source: 'children',
 			selector: ".youtubeUrl"
 		},
+		imgURL2: {
+			type: 'string',
+			source: 'attribute',
+			attribute: 'src',
+			selector: 'img',
+		},
+		imgID2: {
+			type: 'number',
+		},
+		imgAlt2: {
+			type: 'string',
+			source: 'attribute',
+			attribute: 'alt',
+			selector: 'img',
+		},
 	},
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -93,7 +109,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		const onChangeFBUrl = value => props.setAttributes({ facebookUrl: value })
 		const onChangeYTUrl = value => props.setAttributes({ youtubeUrl: value })
 
-		const { attributes: { imgID, imgURL, imgAlt },
+		const { attributes: { imgID, imgURL, imgAlt, imgID2, imgURL2, imgAlt2 },
                 className, setAttributes, isSelected } = props;
             const onSelectImage = img => {
                 setAttributes( {
@@ -109,28 +125,47 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
                     imgAlt: null,
                 });
 			}
+
+			const onSelectImage2 = img => {
+                setAttributes( {
+                    imgID2: img.id,
+                    imgURL2: img.url,
+                    imgAlt2: img.alt,
+                } );
+            };
+            const onRemoveImage2 = () => {
+                setAttributes({
+                    imgID2: null,
+                    imgURL2: null,
+                    imgAlt2: null,
+                });
+			}
 			
 		return (
 			<div className={ props.className }>
 				<RichText 
+				id="prodTitleEditor"
 				tagName="h1"
 				placeholder={__("Production Title")}
 				value={attributes.productionTitle}
 				onChange={onChangeProdTitle}
 				/>
 				<RichText 
+				id="prodDescEditor"
 				tagName="p"
 				placeholder={__("Production Description")}
 				value={attributes.productionDescription}
 				onChange={onChangeProdDescription}
 				/>
 				<RichText 
+				id="prodFBEditor"
 				tagName="p"
 				placeholder={__("Facebook Page URL")}
 				value={attributes.facebookUrl}
 				onChange={onChangeFBUrl}
 				/>
 				<RichText 
+				id="prodYTEditor"
 				tagName="p"
 				placeholder={__("YouTube Pilot URL")}
 				value={attributes.youtubeUrl}
@@ -177,6 +212,45 @@ className={"prodImg"}
 </p>
 )}
 
+{ ! imgID2 ? (
+<MediaUpload
+className={"prodImg"}
+	onSelect={ onSelectImage2 }
+	type="image"
+	value={ imgID2 }
+	render={ ( { open } ) => (
+		<Button
+			className={ "button button-large" }
+			onClick={ open }
+		>
+			{ icons.upload }
+			{ __( ' Upload Image', 'jsforwpblocks' ) }
+		</Button>
+	) }
+>
+</MediaUpload>
+
+) : (
+
+<p class="image-wrapper">
+	<img
+		src={ imgURL2 }
+		alt={ imgAlt2 }
+	/>
+
+	{ isSelected ? (
+
+		<Button
+			className="remove-image"
+			onClick={ onRemoveImage2 }
+		>
+			{ icons.remove }
+		</Button>
+
+	) : null }
+
+</p>
+)}
 			</div>
 		);
 	},
@@ -190,15 +264,20 @@ className={"prodImg"}
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: props =>{
-		const { imgURL, imgAlt, productionTitle, productionDescription, facebookUrl, youtubeUrl } = props.attributes;
+		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeUrl } = props.attributes;
 		
 		return (
 			<div>
-			<p id="productionTitle"> {productionTitle}</p>
+				<div className="titleAndFBLink">
+					<p id="productionTitle"> {productionTitle}</p>
+					{facebookUrl !== "" ? <a href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a> : null}
+				</div>
 			<p id="productionDescription"> {productionDescription}</p>
+			<div className="artworkContainer">
 			<img className="productionImages" src={ imgURL } alt={ imgAlt } />
-			<p id="">{youtubeUrl}</p>
-			{facebookUrl ? <a href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a> : null}
+			<img className="productionImages" src={ imgURL2 } alt={ imgAlt2 } />
+			</div>
+			<p>{youtubeUrl}</p>
 		</div>
 		);
 		
