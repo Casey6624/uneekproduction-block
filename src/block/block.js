@@ -71,6 +71,11 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			source: 'children',
 			selector: ".facebookUrl"
 		},
+		youtubeUrl: {
+			type: 'string',
+			source: 'children',
+			selector: ".youtubeUrl"
+		},
 	},
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -82,10 +87,11 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 	 */
 	edit: function(props){
 		const { attributes } = props; 
-
+		// Change Handlers
 		const onChangeProdTitle = value => props.setAttributes({productionTitle: value})
 		const onChangeProdDescription = value => props.setAttributes({productionDescription: value})
 		const onChangeFBUrl = value => props.setAttributes({ facebookUrl: value })
+		const onChangeYTUrl = value => props.setAttributes({ youtubeUrl: value })
 
 		const { attributes: { imgID, imgURL, imgAlt },
                 className, setAttributes, isSelected } = props;
@@ -123,6 +129,12 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				placeholder={__("Facebook Page URL")}
 				value={attributes.facebookUrl}
 				onChange={onChangeFBUrl}
+				/>
+				<RichText 
+				tagName="p"
+				placeholder={__("YouTube Pilot URL")}
+				value={attributes.youtubeUrl}
+				onChange={onChangeYTUrl}
 				/>
 				
 				{ ! imgID ? (
@@ -178,13 +190,14 @@ className={"prodImg"}
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: props =>{
-		const { imgURL, imgAlt, productionTitle, productionDescription, facebookUrl } = props.attributes;
+		const { imgURL, imgAlt, productionTitle, productionDescription, facebookUrl, youtubeUrl } = props.attributes;
 		
 		return (
 			<div>
 			<p id="productionTitle"> {productionTitle}</p>
 			<p id="productionDescription"> {productionDescription}</p>
-			<img src={ imgURL } alt={ imgAlt } />
+			<img className="productionImages" src={ imgURL } alt={ imgAlt } />
+			<p id="">{youtubeUrl}</p>
 			{facebookUrl ? <a href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a> : null}
 		</div>
 		);
