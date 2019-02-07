@@ -1,0 +1,41 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+.wp-block-cgb-block-uneekproduction-block {
+  background: #fff195;
+  border: 0.2rem solid #1e1e1e;
+  color: #292929;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem; }
+
+#productionTitle {
+  font-size: 28px; }
+
+.image-wrapper {
+  position: relative; }
+
+.prodImg {
+  width: 50%; }
+
+button.remove-image {
+  background-color: #1e1e1e;
+  border: 2px #1e1e1e solid;
+  padding: 5px 5px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: .9; }
+  button.remove-image svg {
+    background: #1e1e1e;
+    fill: white; }
+  button.remove-image:hover {
+    opacity: 1; }
