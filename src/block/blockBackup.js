@@ -43,12 +43,12 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 	],
 	attributes: {
 		productionTitle: {
-			type: "array",
+			type: "string",
 			source: "children",
 			selector: ".productionTitle"
 		},
 		productionDescription: {
-			type: "array",
+			type: "string",
 			source: "children",
 			selector: ".productionDescription"
 		},
@@ -56,7 +56,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'src',
-			selector: '.img',
+			selector: 'img',
 		},
 		imgID: {
 			type: 'number',
@@ -65,24 +65,23 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'alt',
-			selector: '.img',
+			selector: 'img',
 		},
 		facebookUrl: {
 			type: 'string',
-			source: 'attribute',
-			selector: ".facebookUrl",
-			attribute: "href"
+			source: 'children',
+			selector: ".facebookUrl"
 		},
 		youtubeUrl: {
 			type: 'string',
-			source: 'html',
+			source: 'children',
 			selector: ".youtubeUrl"
 		},
 		imgURL2: {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'src',
-			selector: '.img',
+			selector: 'img',
 		},
 		imgID2: {
 			type: 'number',
@@ -91,7 +90,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'alt',
-			selector: '.img',
+			selector: 'img',
 		},
 	},
 	/**
@@ -145,7 +144,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		return (
 			<div className={ props.className }>
 				<RichText 
-				className="productionTitle"
 				id="prodTitleEditor"
 				tagName="h1"
 				placeholder={__("Production Title")}
@@ -153,7 +151,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeProdTitle}
 				/>
 				<RichText 
-				className="productionDescription"
 				id="prodDescEditor"
 				tagName="p"
 				placeholder={__("Production Description")}
@@ -161,7 +158,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeProdDescription}
 				/>
 				<RichText 
-				className="facebookUrl"
 				id="prodFBEditor"
 				tagName="p"
 				placeholder={__("Facebook Page URL")}
@@ -169,7 +165,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeFBUrl}
 				/>
 				<RichText 
-				className="youtubeUrl"
 				id="prodYTEditor"
 				tagName="p"
 				placeholder={__("YouTube Pilot URL")}
@@ -177,7 +172,85 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeYTUrl}
 				/>
 				
+				{ ! imgID ? (
+<MediaUpload
+className={"prodImg"}
+	onSelect={ onSelectImage }
+	type="image"
+	value={ imgID }
+	render={ ( { open } ) => (
+		<Button
+			className={ "button button-large" }
+			onClick={ open }
+		>
+			{ icons.upload }
+			{ __( ' Upload Image', 'jsforwpblocks' ) }
+		</Button>
+	) }
+>
+</MediaUpload>
 
+) : (
+
+<p class="image-wrapper">
+	<img
+		src={ imgURL }
+		alt={ imgAlt }
+	/>
+
+	{ isSelected ? (
+
+		<Button
+			className="remove-image"
+			onClick={ onRemoveImage }
+		>
+			{ icons.remove }
+		</Button>
+
+	) : null }
+
+</p>
+)}
+
+{ ! imgID2 ? (
+<MediaUpload
+className={"prodImg"}
+	onSelect={ onSelectImage2 }
+	type="image"
+	value={ imgID2 }
+	render={ ( { open } ) => (
+		<Button
+			className={ "button button-large" }
+			onClick={ open }
+		>
+			{ icons.upload }
+			{ __( ' Upload Image', 'jsforwpblocks' ) }
+		</Button>
+	) }
+>
+</MediaUpload>
+
+) : (
+
+<p class="image-wrapper">
+	<img
+		src={ imgURL2 }
+		alt={ imgAlt2 }
+	/>
+
+	{ isSelected ? (
+
+		<Button
+			className="remove-image"
+			onClick={ onRemoveImage2 }
+		>
+			{ icons.remove }
+		</Button>
+
+	) : null }
+
+</p>
+)}
 			</div>
 		);
 	},
@@ -196,13 +269,15 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		return (
 			<div>
 				<div className="titleAndFBLink">
-					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
-					<a className="facebookUrl" href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a>
-					</div>
-			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
+					<p id="productionTitle"> {productionTitle}</p>
+					{facebookUrl !== "" ? <a href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a> : null}
+				</div>
+			<p id="productionDescription"> {productionDescription}</p>
 			<div className="artworkContainer">
+			<img className="productionImages" src={ imgURL } alt={ imgAlt } />
+			<img className="productionImages" src={ imgURL2 } alt={ imgAlt2 } />
 			</div>
-			<p className="youtubeUrl">{youtubeUrl}</p>
+			<p>{youtubeUrl}</p>
 		</div>
 		);
 		

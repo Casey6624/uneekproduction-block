@@ -5,7 +5,7 @@
  */
  @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 
- @media only screen and (max-width: 550px){
+ @media only screen and (max-width: 600px){
   .artworkContainer{
     display: grid !important;
     text-align: center;
@@ -13,7 +13,7 @@
     text-align: -webkit-center;
   }
   .productionImages{
-    padding: 10px !important;
+    margin: 10px !important;
     width: 100% !important;
   }
 }
@@ -33,14 +33,19 @@
 }
 
 #productionDescription{
-  font-size: 32px;
-  line-height: 100%;
+  font-size: 30px;
+  line-height: 110%;
+  color: #1e1e1e;
+  padding: 15px;
 }
 
 
 .productionImages{
   width: 45%;
   align-self: flex-start;
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(30,30,30,1);
+  -moz-box-shadow: 4px 4px 5px 0px rgba(30,30,30,1);
+  box-shadow: 4px 4px 5px 0px rgba(30,30,30,1);
 }
 
 .artworkContainer{
