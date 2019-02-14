@@ -56,7 +56,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'src',
-			selector: '.img',
+			selector: '.prodImg',
 		},
 		imgID: {
 			type: 'number',
@@ -65,7 +65,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'alt',
-			selector: '.img',
+			selector: '.prodImg',
 		},
 		facebookUrl: {
 			type: 'string',
@@ -82,7 +82,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'src',
-			selector: '.img',
+			selector: '.prodImg2',
 		},
 		imgID2: {
 			type: 'number',
@@ -91,7 +91,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			attribute: 'alt',
-			selector: '.img',
+			selector: '.prodImg2',
 		},
 	},
 	/**
@@ -143,7 +143,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			}
 			
 		return (
-			<div className={ props.className }>
+			<div className={ className }>
 				<RichText 
 				className="productionTitle"
 				id="prodTitleEditor"
@@ -177,6 +177,85 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeYTUrl}
 				/>
 				
+				{ ! imgID ? (
+<MediaUpload
+className="prodImg"
+	onSelect={ onSelectImage }
+	type="image"
+	value={ imgID }
+	render={ ( { open } ) => (
+		<Button
+			className={ "button button-large" }
+			onClick={ open }
+		>
+			{ icons.upload }
+			{ __( ' Upload Image', 'jsforwpblocks' ) }
+		</Button>
+	) }
+>
+</MediaUpload>
+
+) : (
+
+<p class="image-wrapper">
+	<img
+		src={ imgURL }
+		alt={ imgAlt }
+	/>
+
+	{ isSelected ? (
+
+		<Button
+			className="remove-image"
+			onClick={ onRemoveImage }
+		>
+			{ icons.remove }
+		</Button>
+
+	) : null }
+
+</p>
+)}
+
+{ ! imgID2 ? (
+	<MediaUpload
+	className="prodImg"
+		onSelect={ onSelectImage2 }
+		type="image"
+		value={ imgID2 }
+		render={ ( { open } ) => (
+			<Button
+				className={ "button button-large" }
+				onClick={ open }
+			>
+				{ icons.upload }
+				{ __( ' Upload Image', 'jsforwpblocks' ) }
+			</Button>
+		) }
+	>
+	</MediaUpload>
+	
+	) : (
+	
+	<p class="image-wrapper">
+		<img
+			src={ imgURL2 }
+			alt={ imgAlt2 }
+		/>
+	
+		{ isSelected ? (
+	
+			<Button
+				className="remove-image"
+				onClick={ onRemoveImage2 }
+			>
+				{ icons.remove }
+			</Button>
+	
+		) : null }
+	
+	</p>
+	)}
 
 			</div>
 		);
@@ -200,8 +279,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 					<a className="facebookUrl" href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a>
 					</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
-			<div className="artworkContainer">
-			</div>
+				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
+				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
 			<p className="youtubeUrl">{youtubeUrl}</p>
 		</div>
 		);
