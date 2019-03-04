@@ -12,6 +12,7 @@ import icons from './icons';
 
 //  Components
 import FacebookLogo from "../SharedComponents/FacebookLogo";
+import ShareLogo from "../SharedComponents/ShareLogo";
 import GalleryUpload from "../SharedComponents/GalleryUpload";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
@@ -284,19 +285,23 @@ className="prodImg"
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: props =>{
+
 		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes;
-		
+		const iframe = <iframe style={{color: "transparent"}} id="CFiframe" src="https://www.crowdfunder.co.uk/uneek-testing/widget.js" width="400" height="800"></iframe>
+
 		return (
 			<div>
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a>
-					</div>
+					<a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} ><ShareLogo /></a>
+				</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
 				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
+			<p class="CFiframeContainer">{iframe}</p>
 		</div>
 		);
 		

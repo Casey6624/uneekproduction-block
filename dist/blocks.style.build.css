@@ -69,3 +69,6 @@
   -ms-flex-align: center;
       align-items: center;
   margin: 10px; }
+
+#CFiframe {
+  font-size: 0; }
