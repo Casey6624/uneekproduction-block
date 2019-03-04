@@ -1,1 +1,71 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300");@media only screen and (max-width: 600px){#artworkContainer{display:grid !important;text-align:center;margin:0 auto !important;text-align:-webkit-center}.prodImg,.prodImg2{width:100% !important;margin:10px !important}.titleAndFBLink{display:grid !important}}.wp-block-cgb-block-uneekproduction-block{background:#fff195;border:0.5rem solid #1e1e1e;color:#1e1e1e;margin:0 auto;padding:2rem}#productionTitle{font-size:80px;text-align:center;font-family:'Open Sans Condensed', sans-serif;line-height:70px}#productionDescription{font-size:30px;line-height:110%;color:#1e1e1e;font-family:'Open Sans Condensed', sans-serif;padding:15px}.prodImg,.prodImg2{width:45%;margin:5px;text-align:center;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-shadow:4px 4px 5px 0px #1e1e1e;box-shadow:4px 4px 5px 0px #1e1e1e}#artworkContainer{text-align:center;-ms-flex-pack:distribute;justify-content:space-around;-ms-flex-line-pack:center;align-content:center;-ms-flex-direction:row;flex-direction:row;height:100%}.titleAndFBLink{display:-ms-flexbox;display:flex;-ms-flex-pack:justify;justify-content:space-between;-ms-flex-align:center;align-items:center;margin:10px}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300");
+@media only screen and (max-width: 600px) {
+  #artworkContainer {
+    display: grid !important;
+    text-align: center;
+    margin: 0 auto !important;
+    text-align: -webkit-center; }
+  .prodImg, .prodImg2 {
+    width: 100% !important;
+    margin: 10px !important; }
+  .titleAndFBLink {
+    display: grid !important; } }
+
+.wp-block-cgb-block-uneekproduction-block {
+  background: #fff195;
+  border: 0.5rem solid #1e1e1e;
+  color: #1e1e1e;
+  margin: 0 auto;
+  padding: 2rem; }
+
+#productionTitle {
+  font-size: 80px;
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 70px; }
+
+#productionDescription {
+  font-size: 30px;
+  line-height: 110%;
+  color: #1e1e1e;
+  font-family: 'Open Sans Condensed', sans-serif;
+  padding: 15px; }
+
+.prodImg, .prodImg2 {
+  width: 45%;
+  margin: 5px;
+  text-align: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -webkit-box-shadow: 4px 4px 5px 0px #1e1e1e;
+  box-shadow: 4px 4px 5px 0px #1e1e1e; }
+
+#artworkContainer {
+  text-align: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  height: 100%; }
+
+.titleAndFBLink {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  margin: 10px; }

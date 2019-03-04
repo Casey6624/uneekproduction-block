@@ -73,10 +73,15 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			selector: ".facebookUrl",
 			attribute: "href"
 		},
-		youtubeUrl: {
+		youtubeTrailerUrl: {
 			type: 'string',
 			source: 'html',
-			selector: ".youtubeUrl"
+			selector: ".youtubeTrailerUrl"
+		},
+		youtubeFullLengthUrl: {
+			type: 'string',
+			source: 'html',
+			selector: ".youtubeFullLengthUrl"
 		},
 		imgURL2: {
 			type: 'string',
@@ -108,7 +113,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		const onChangeProdTitle = value => props.setAttributes({productionTitle: value})
 		const onChangeProdDescription = value => props.setAttributes({productionDescription: value})
 		const onChangeFBUrl = value => props.setAttributes({ facebookUrl: value })
-		const onChangeYTUrl = value => props.setAttributes({ youtubeUrl: value })
+		const onChangeYTTrailerUrl = value => props.setAttributes({ youtubeTrailerUrl: value })
+		const onChangeYTFullLengthUrl = value => props.setAttributes({ youtubeFullLengthUrl: value })
 
 		const { attributes: { imgID, imgURL, imgAlt, imgID2, imgURL2, imgAlt2 },
                 className, setAttributes, isSelected } = props;
@@ -169,12 +175,20 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeFBUrl}
 				/>
 				<RichText 
-				className="youtubeUrl"
+				className="youtubeTrailerUrl"
 				id="prodYTEditor"
 				tagName="p"
 				placeholder={__("YouTube Pilot URL")}
-				value={attributes.youtubeUrl}
-				onChange={onChangeYTUrl}
+				value={attributes.youtubeTrailerUrl}
+				onChange={onChangeYTTrailerUrl}
+				/>
+				<RichText 
+				className="youtubeFullLengthUrl"
+				id="prodYTEditor"
+				tagName="p"
+				placeholder={__("YouTube Full Length URL")}
+				value={attributes.youtubeFullLengthUrl}
+				onChange={onChangeYTFullLengthUrl}
 				/>
 				
 				{ ! imgID ? (
@@ -270,18 +284,19 @@ className="prodImg"
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: props =>{
-		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeUrl } = props.attributes;
+		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes;
 		
 		return (
 			<div>
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
-					<a className="facebookUrl" href={`${facebookUrl}`} target="_blank"><FacebookLogo/></a>
+					<a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a>
 					</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
 				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
-			<p className="youtubeUrl">{youtubeUrl}</p>
+			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
+			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 		</div>
 		);
 		
