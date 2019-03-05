@@ -12,8 +12,9 @@ import icons from './icons';
 
 //  Components
 import FacebookLogo from "../SharedComponents/FacebookLogo";
-import ShareLogo from "../SharedComponents/ShareLogo";
 import GalleryUpload from "../SharedComponents/GalleryUpload";
+import ShareLogo from "../SharedComponents/ShareLogo";
+import LikeLogo from "../SharedComponents/LikeLogo";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -100,6 +101,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			selector: '.prodImg2',
 		},
 	},
+	
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
 	 * This represents what the editor will render when the block is used.
@@ -108,7 +110,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
-	edit: function(props){
+	edit: function(props) { 
 		const { attributes } = props; 
 		// Change Handlers
 		const onChangeProdTitle = value => props.setAttributes({productionTitle: value})
@@ -287,21 +289,22 @@ className="prodImg"
 	save: props =>{
 
 		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes;
-		const iframe = <iframe style={{color: "transparent"}} id="CFiframe" src="https://www.crowdfunder.co.uk/uneek-testing/widget.js" width="400" height="800"></iframe>
 
 		return (
 			<div>
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
-					<a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a>
-					<a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} ><ShareLogo /></a>
+					<div className="fbAndshareIcons">
+					{facebookUrl != undefined ? <a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a> : null}
+					{facebookUrl != undefined ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > <ShareLogo /> </a> : null}
+					{facebookUrl != undefined ? <a href={`https://www.facebook.com/plugins/like.php?href=${`${facebookUrl}`}`} > <LikeLogo /> </a> : null}
+					</div>
 				</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
 				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
-			<p class="CFiframeContainer">{iframe}</p>
 		</div>
 		);
 		
