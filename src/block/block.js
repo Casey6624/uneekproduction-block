@@ -15,6 +15,7 @@ import FacebookLogo from "../SharedComponents/FacebookLogo";
 import GalleryUpload from "../SharedComponents/GalleryUpload";
 import ShareLogo from "../SharedComponents/ShareLogo";
 import LikeLogo from "../SharedComponents/LikeLogo";
+import indieGoGo from "../SharedComponents/IndieGoGo"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -289,7 +290,7 @@ className="prodImg"
 	save: props =>{
 
 		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes;
-
+	
 		return (
 			<div>
 				<div className="titleAndFBLink">
@@ -305,6 +306,9 @@ className="prodImg"
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
+			<div className="indieGoGo">
+				<indieGoGo />
+			</div>
 		</div>
 		);
 		
