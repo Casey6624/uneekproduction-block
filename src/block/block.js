@@ -129,11 +129,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			source: "children",
 			selector: ".funding_ends_at"
 		},
-		image_types: {
-			type: "array",
-			source: "children",
-			selector: ".image_types"
-		},
 		tagline: {
 			type: "array",
 			source: "children",
@@ -144,8 +139,18 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			source: 'attribute',
 			selector: ".web_url",
 			attribute: "href"
+		},
+		image_types: {
+			type: 'string',
+			source: 'attribute',
+			attribute: 'src',
+			selector: ".image_types"
 		}
-
+		/* image_types: {
+			type: "array",
+			source: "children",
+			selector: ".image_types"
+		} */
 	},
 	
 	/**
@@ -202,11 +207,10 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			const callIndieGoGoAPI = e => {
 				let api_token = "9986282a50bd2a3befe85098fe420f89c391d53f45812522cdab096f14618794"
 
-				let access_token = "03403e8ccd70aee642eb6da1d501b19fefc622646c1a308289d9963b2cbcf921"
-				
+        		let access_token = "03403e8ccd70aee642eb6da1d501b19fefc622646c1a308289d9963b2cbcf921"
+								
 				//let campaignID = "2478659"
 				let campaignID = attributes.indiegogoAPI[0]
-				console.log(campaignID)
 				let api_url = `https://api.indiegogo.com/1/campaigns/${campaignID}.json?api_token=${api_token}`
 		
 				fetch(api_url)
@@ -217,7 +221,9 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 						setAttributes({indieGoGoErrorOrSuccess: `Oops! Couldn't find that campaign. Recieved Error: ${data.error}`})
                     	return Promise.reject()
 					}else{
-						const { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url } = data.response
+						let { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url } = data.response
+
+						image_types = image_types.baseball_card
 
 						let fundProgress = `We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`
 						setAttributes({indieGoGoErrorOrSuccess: "Valid campaign found!", fundProgress, funding_ends_at, image_types, title, tagline, web_url})
@@ -400,7 +406,7 @@ className="prodImg"
 				<h2 className="title">{title}</h2>
 				<p className="tagline">{tagline}</p>
 				<p className="fundProgress">{fundProgress}</p>
-
+				<img className="image_types" src={image_types}/>
 				<p className="funding_ends_at">{funding_ends_at}</p>
 				<a className="web_url" href={`${web_url}`}>VIEW ON INDIEGOGO</a>
             </div>
