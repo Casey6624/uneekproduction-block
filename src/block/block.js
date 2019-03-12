@@ -11,11 +11,10 @@ import './editor.scss';
 import icons from './icons';
 
 //  Components
-import FacebookLogo from "../SharedComponents/FacebookLogo";
-import GalleryUpload from "../SharedComponents/GalleryUpload";
-import ShareLogo from "../SharedComponents/ShareLogo";
-import LikeLogo from "../SharedComponents/LikeLogo";
-import indieGoGo from "../SharedComponents/IndieGoGo"
+import FacebookLogo from "../SharedComponents/FacebookLogo"
+import GalleryUpload from "../SharedComponents/GalleryUpload"
+import ShareLogo from "../SharedComponents/ShareLogo"
+import LikeLogo from "../SharedComponents/LikeLogo"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -101,6 +100,21 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			attribute: 'alt',
 			selector: '.prodImg2',
 		},
+		indiegogoAPI: {
+			type: "array",
+			source: "children",
+			selector: ".indiegogoAPI"
+		},
+		indieGoGoErrorOrSuccess: {
+			type: "array",
+			source: "children",
+			selector: ".indieGoGoErrorOrSuccess"
+		},
+		indieGoGoAPIData: {
+			type: "object",
+			source: "children",
+			selector: ".indieGoGoAPIData"
+		}
 	},
 	
 	/**
@@ -119,6 +133,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		const onChangeFBUrl = value => props.setAttributes({ facebookUrl: value })
 		const onChangeYTTrailerUrl = value => props.setAttributes({ youtubeTrailerUrl: value })
 		const onChangeYTFullLengthUrl = value => props.setAttributes({ youtubeFullLengthUrl: value })
+		const onChangeIndiegogo = value => props.setAttributes({ indiegogoAPI: value })
+
 
 		const { attributes: { imgID, imgURL, imgAlt, imgID2, imgURL2, imgAlt2 },
                 className, setAttributes, isSelected } = props;
@@ -150,6 +166,36 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
                     imgURL2: null,
                     imgAlt2: null,
                 });
+			}
+
+			const callIndieGoGoAPI = e => {
+				let api_token = "9986282a50bd2a3befe85098fe420f89c391d53f45812522cdab096f14618794"
+
+				let access_token = "03403e8ccd70aee642eb6da1d501b19fefc622646c1a308289d9963b2cbcf921"
+				
+				//let campaignID = "2478659"
+				let campaignID = attributes.indiegogoAPI[0]
+				console.log(campaignID)
+				let api_url = `https://api.indiegogo.com/1/campaigns/${campaignID}.json?api_token=${api_token}`
+		
+				fetch(api_url)
+				.then(res => res.json())
+				.then(data => {
+					console.log(data)
+					if(data.error){
+						setAttributes({indieGoGoErrorOrSuccess: `Oops! Couldn't find that campaign. Recieved Error: ${data.error}`})
+                    	return Promise.reject()
+					}else{
+						setAttributes({indieGoGoErrorOrSuccess: "Valid campaign found!", indieGoGoAPIData: data})
+					}
+					
+					
+				}) 
+				.catch(error => {
+					
+                })
+					
+				
 			}
 			
 		return (
@@ -194,6 +240,16 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				value={attributes.youtubeFullLengthUrl}
 				onChange={onChangeYTFullLengthUrl}
 				/>
+				<RichText 
+				className="indiegogoAPI"
+				id="indiegogoAPI"
+				tagName="p"
+				placeholder={__("Please enter IndieGoGo Campaign ID")}
+				value={attributes.indiegogoAPI}
+				onChange={onChangeIndiegogo}
+				/>
+				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
+				<button onClick={callIndieGoGoAPI}>SUBMIT</button> <br />
 				
 				{ ! imgID ? (
 <MediaUpload
@@ -289,8 +345,11 @@ className="prodImg"
 	 */
 	save: props =>{
 
-		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes;
-	
+		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes
+
+		const { collected_funds, goal, funding_ends_at, currency, image_types, title: indieGoGoTitle, tagline, web_url } = props.attributes.indieGoGoAPIData
+		
+		
 		return (
 			<div>
 				<div className="titleAndFBLink">
@@ -307,8 +366,11 @@ className="prodImg"
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 			<div className="indieGoGo">
-				<indieGoGo />
-			</div>
+                <h1>INDIEGOGO</h1>
+				{indieGoGoTitle != undefined ? <h2>{indieGoGoTitle}</h2> : null}
+{/* 				<p>{tagline}</p>
+                <p>{`We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`}</p> */}
+            </div>
 		</div>
 		);
 		
