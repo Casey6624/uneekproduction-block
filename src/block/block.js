@@ -384,7 +384,7 @@ className="prodImg"
 	 */
 	save: props =>{
 
-		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url } = props.attributes
+		let { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url } = props.attributes
 		
 		return (
 			<div>
@@ -402,13 +402,17 @@ className="prodImg"
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 			<div className="indieGoGo">
-                <h1>INDIEGOGO</h1>
+                <h1 className="indieGoGoTitle">INDIEGOGO</h1>
 				<h2 className="title">{title}</h2>
-				<p className="tagline">{tagline}</p>
 				<p className="fundProgress">{fundProgress}</p>
+				<div className="imageAndTagline">
 				<img className="image_types" src={image_types}/>
-				<p className="funding_ends_at">{funding_ends_at}</p>
-				<a className="web_url" href={`${web_url}`}>VIEW ON INDIEGOGO</a>
+					<div className="textAndButton">
+						<p className="tagline">{tagline}</p>
+						<a className="web_url" href={`${web_url}`}> <button>VIEW ON INDIEGOGO</button></a>
+						<p className="funding_ends_at">{funding_ends_at}</p>
+					</div>
+				</div>
             </div>
 		</div>
 		);

@@ -10,6 +10,7 @@
  * CSS for both Frontend+Backend.
  */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300");
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
 @media only screen and (max-width: 600px) {
   #artworkContainer {
     display: grid !important;
@@ -73,3 +74,19 @@
 .fbAndshareIcons {
   display: -ms-flexbox;
   display: flex; }
+
+.title, .fundProgress {
+  font-family: 'Amatic SC', cursive; }
+
+.tagline, .funding_ends_at, .indieGoGoTitle {
+  font-family: 'Open Sans Condensed', sans-serif; }
+
+.fundProgress {
+  font-size: 30px; }
+
+.imageAndTagline {
+  display: -ms-flexbox;
+  display: flex; }
+
+.textAndButton {
+  margin: 10px; }
