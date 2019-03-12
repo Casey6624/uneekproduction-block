@@ -100,21 +100,52 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			attribute: 'alt',
 			selector: '.prodImg2',
 		},
+		// Campaign ID
 		indiegogoAPI: {
 			type: "array",
 			source: "children",
 			selector: ".indiegogoAPI"
 		},
+		// Success / Error Message in the editor
 		indieGoGoErrorOrSuccess: {
 			type: "array",
 			source: "children",
 			selector: ".indieGoGoErrorOrSuccess"
 		},
-		indieGoGoAPIData: {
-			type: "object",
+		// API Data begins here
+		title: {
+			type: "array",
 			source: "children",
-			selector: ".indieGoGoAPIData"
+			selector: ".title"
+		},
+		fundProgress: {
+			type: "array",
+			source: "children",
+			selector: ".fundProgress"
+		},
+		
+		funding_ends_at: {
+			type: "array",
+			source: "children",
+			selector: ".funding_ends_at"
+		},
+		image_types: {
+			type: "array",
+			source: "children",
+			selector: ".image_types"
+		},
+		tagline: {
+			type: "array",
+			source: "children",
+			selector: ".tagline"
+		},
+		web_url: {
+			type: 'string',
+			source: 'attribute',
+			selector: ".web_url",
+			attribute: "href"
 		}
+
 	},
 	
 	/**
@@ -186,9 +217,11 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 						setAttributes({indieGoGoErrorOrSuccess: `Oops! Couldn't find that campaign. Recieved Error: ${data.error}`})
                     	return Promise.reject()
 					}else{
-						setAttributes({indieGoGoErrorOrSuccess: "Valid campaign found!", indieGoGoAPIData: data})
+						const { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url } = data.response
+
+						let fundProgress = `We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`
+						setAttributes({indieGoGoErrorOrSuccess: "Valid campaign found!", fundProgress, funding_ends_at, image_types, title, tagline, web_url})
 					}
-					
 					
 				}) 
 				.catch(error => {
@@ -345,10 +378,7 @@ className="prodImg"
 	 */
 	save: props =>{
 
-		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl } = props.attributes
-
-		const { collected_funds, goal, funding_ends_at, currency, image_types, title: indieGoGoTitle, tagline, web_url } = props.attributes.indieGoGoAPIData
-		
+		const { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url } = props.attributes
 		
 		return (
 			<div>
@@ -367,9 +397,12 @@ className="prodImg"
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 			<div className="indieGoGo">
                 <h1>INDIEGOGO</h1>
-				{indieGoGoTitle != undefined ? <h2>{indieGoGoTitle}</h2> : null}
-{/* 				<p>{tagline}</p>
-                <p>{`We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`}</p> */}
+				<h2 className="title">{title}</h2>
+				<p className="tagline">{tagline}</p>
+				<p className="fundProgress">{fundProgress}</p>
+
+				<p className="funding_ends_at">{funding_ends_at}</p>
+				<a className="web_url" href={`${web_url}`}>VIEW ON INDIEGOGO</a>
             </div>
 		</div>
 		);
