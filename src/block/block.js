@@ -172,8 +172,16 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 
 		const onChangeFBUrl = function(value){
 
-			console.log(`Value is: ${value}`)
-			props.setAttributes({ facebookUrl: value })
+			value = value.trim()
+
+			if(value.includes("https://www.facebook.com/") && value != ""){{
+				props.setAttributes({ facebookUrl: value })
+			}}else if(!value.includes("https://www.facebook.com/" && value != "")){
+				value = `https://www.facebook.com/${value}`
+				props.setAttributes({ facebookUrl: value })
+			}else{
+				props.setAttributes({ facebookUrl: value })
+			}
 		}
 
 
@@ -262,9 +270,10 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				className="facebookUrl"
 				id="prodFBEditor"
 				tagName="p"
-				placeholder={__("Facebook Page URL")}
+				placeholder={__("Enter Facebook Page name: E.g www.facebook.com/<THIS PART AFTER THE SLASH>")}
 				label="Facebook Page URL"
 				value={attributes.facebookUrl}
+				multiline = { false }
 				onChange={onChangeFBUrl}
 				/>
 				<RichText 
@@ -397,14 +406,16 @@ className="prodImg"
 
 		let { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url } = props.attributes
 		
+		let facebookRootUrl = "https://www.facebook.com/"
+
 		return (
 			<div>
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div className="fbAndshareIcons">
-					{facebookUrl != undefined ? <a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a> : null}
-					{facebookUrl != undefined ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > <ShareLogo /> </a> : null}
-					{facebookUrl != undefined ? <a href={`https://www.facebook.com/plugins/like.php?href=${`${facebookUrl}`}`} > <LikeLogo /> </a> : null}
+					{facebookUrl != facebookRootUrl ? <a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a> : null}
+					{facebookUrl != facebookRootUrl ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > <ShareLogo /> </a> : null}
+					{facebookUrl != facebookRootUrl ? <a href={`https://www.facebook.com/plugins/like.php?href=${`${facebookUrl}`}`} > <LikeLogo /> </a> : null}
 					</div>
 				</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
