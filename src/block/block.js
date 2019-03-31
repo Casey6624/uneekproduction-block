@@ -14,7 +14,6 @@ import icons from './icons';
 import FacebookLogo from "../SharedComponents/FacebookLogo"
 import GalleryUpload from "../SharedComponents/GalleryUpload"
 import ShareLogo from "../SharedComponents/ShareLogo"
-import LikeLogo from "../SharedComponents/LikeLogo"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -103,7 +102,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		},
 		// Campaign ID
 		indiegogoAPI: {
-			type: "array",
+			type: "string",
+			default: "",
 			source: "children",
 			selector: ".indiegogoAPI"
 		},
@@ -158,18 +158,19 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function(props) { 
-		const { attributes } = props; 
+		const { attributes, setAttributes } = props; 
 		// Change Handlers
-		const onChangeProdTitle = value => props.setAttributes({productionTitle: value})
-		const onChangeProdDescription = value => props.setAttributes({productionDescription: value})
-		const onChangeYTTrailerUrl = value => props.setAttributes({ youtubeTrailerUrl: value })
-		const onChangeYTFullLengthUrl = value => props.setAttributes({ youtubeFullLengthUrl: value })
+		const onChangeProdTitle = value => setAttributes({productionTitle: value})
+		const onChangeProdDescription = value => setAttributes({productionDescription: value})
+		const onChangeYTTrailerUrl = value => setAttributes({ youtubeTrailerUrl: value })
+		const onChangeYTFullLengthUrl = value => setAttributes({ youtubeFullLengthUrl: value })
 
 		const onChangeIndiegogo = value => {
 
-			console.log({value})
+			console.log(value)
 
-			value = value[0].trim()
+			console.log(`AFTER TRIM ${value}`)
+
 			props.setAttributes({ indiegogoAPI: value })
 		}
 
@@ -190,7 +191,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 
 
 		const { attributes: { imgID, imgURL, imgAlt, imgID2, imgURL2, imgAlt2 },
-                className, setAttributes, isSelected } = props;
+                className, isSelected } = props;
             const onSelectImage = img => {
                 setAttributes( {
                     imgID: img.id,
@@ -219,6 +220,13 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
                     imgURL2: null,
                     imgAlt2: null,
                 });
+			}
+
+			const clearIndieGoGoCampaignId = () => {
+				setAttributes({
+					indiegogoAPI: "",
+					indieGoGoErrorOrSuccess: null
+				})
 			}
 
 			const callIndieGoGoAPI = () => {
@@ -302,6 +310,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				tagName="p"
 				placeholder={__("Please enter IndieGoGo Campaign ID")}
 				value={attributes.indiegogoAPI}
+				multiline = { false }
 				onChange={onChangeIndiegogo}
 				/>
 				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
@@ -312,6 +321,15 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				{icons.submit}
 				&nbsp;
 				Submit Campaign 
+				</button>
+
+				<button
+				className="components-button button button-large" 
+				onClick={clearIndieGoGoCampaignId}
+				>
+				{icons.bin}
+				&nbsp;
+				Remove Campaign 
 				</button>
 				
 				{ ! imgID ? (
@@ -408,38 +426,49 @@ className="prodImg"
 	 */
 	save: props =>{
 
-		let { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url } = props.attributes
+		let { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url, indiegogoAPI } = props.attributes
 		
+		let indiegogoFull = null
+
 		let facebookRootUrl = "https://www.facebook.com/"
+
+		let iframeSource = `https://www.facebook.com/plugins/like.php?href=${facebookUrl}&width=450&layout=standard&action=like&size=small&show_faces=true&share=false&height=80&appId`
+
+		let fbIframe = <iframe src={iframeSource} width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+		if(indiegogoAPI != ""){
+			indiegogoFull = (<div className="indieGoGo">
+			<h1 className="indieGoGoTitle">INDIEGOGO</h1>
+			<h2 className="title">{title}</h2>
+			<p className="fundProgress">{fundProgress}</p>
+			<div className="imageAndTagline">
+			<img className="image_types" src={image_types}/>
+				<div className="textAndButton">
+					<p className="tagline">{tagline}</p>
+					<a className="web_url" href={`${web_url}`}> <button>VIEW ON INDIEGOGO</button></a>
+					<p className="funding_ends_at">{funding_ends_at}</p>
+				</div>
+			</div>
+		</div>)
+		}
 
 		return (
 			<div>
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div className="fbAndshareIcons">
-					{facebookUrl != facebookRootUrl ? <a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a> : null}
-					{facebookUrl != facebookRootUrl ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > <ShareLogo /> </a> : null}
-					{facebookUrl != facebookRootUrl ? <a href={`https://www.facebook.com/plugins/like.php?href=${`${facebookUrl}`}`} > <LikeLogo /> </a> : null}
+					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a> : null}
+					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > <ShareLogo /> </a> : null}
+					<div id="fbLikeIframe"> {fbIframe} </div>
 					</div>
 				</div>
+				<p>{indiegogoAPI}</p>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
 				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
-			<div className="indieGoGo">
-                <h1 className="indieGoGoTitle">INDIEGOGO</h1>
-				<h2 className="title">{title}</h2>
-				<p className="fundProgress">{fundProgress}</p>
-				<div className="imageAndTagline">
-				<img className="image_types" src={image_types}/>
-					<div className="textAndButton">
-						<p className="tagline">{tagline}</p>
-						<a className="web_url" href={`${web_url}`}> <button>VIEW ON INDIEGOGO</button></a>
-						<p className="funding_ends_at">{funding_ends_at}</p>
-					</div>
-				</div>
-            </div>
+			{indiegogoFull}
 		</div>
 		);
 		
