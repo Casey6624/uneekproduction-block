@@ -73,7 +73,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			type: 'string',
 			source: 'attribute',
 			selector: ".facebookUrl",
-			attribute: "href"
+			attribute: "href",
+			default: ""
 		},
 		youtubeTrailerUrl: {
 			type: 'string',
@@ -146,11 +147,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			attribute: 'src',
 			selector: ".image_types"
 		}
-		/* image_types: {
-			type: "array",
-			source: "children",
-			selector: ".image_types"
-		} */
 	},
 	
 	/**
@@ -168,12 +164,20 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		const onChangeProdDescription = value => props.setAttributes({productionDescription: value})
 		const onChangeYTTrailerUrl = value => props.setAttributes({ youtubeTrailerUrl: value })
 		const onChangeYTFullLengthUrl = value => props.setAttributes({ youtubeFullLengthUrl: value })
-		const onChangeIndiegogo = value => props.setAttributes({ indiegogoAPI: value })
+
+		const onChangeIndiegogo = value => {
+
+			console.log({value})
+
+			value = value[0].trim()
+			props.setAttributes({ indiegogoAPI: value })
+		}
 
 		const onChangeFBUrl = function(value){
 
 			value = value.trim()
 
+			// Here we need to check if facebook root URL has been appended yet, if it hasn't add it, if it has then skip adding it
 			if(value.includes("https://www.facebook.com/") && value != ""){{
 				props.setAttributes({ facebookUrl: value })
 			}}else if(!value.includes("https://www.facebook.com/" && value != "")){
@@ -217,7 +221,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
                 });
 			}
 
-			const callIndieGoGoAPI = e => {
+			const callIndieGoGoAPI = () => {
 				let api_token = "9986282a50bd2a3befe85098fe420f89c391d53f45812522cdab096f14618794"
 								
 				//let campaignID = "2478659"
@@ -242,7 +246,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 					
 				}) 
 				.catch(error => {
-					
+					console.log(`API Error! ${error}`)
                 })
 					
 				
