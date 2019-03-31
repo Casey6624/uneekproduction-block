@@ -18,7 +18,7 @@ import LikeLogo from "../SharedComponents/LikeLogo"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { RichText, MediaUpload, Editable } = wp.editor;
+const { RichText, MediaUpload, Editable, TextControl } = wp.editor;
 const { Button } = wp.components;
 /**
  * Register: aa Gutenberg Block.
@@ -166,10 +166,15 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		// Change Handlers
 		const onChangeProdTitle = value => props.setAttributes({productionTitle: value})
 		const onChangeProdDescription = value => props.setAttributes({productionDescription: value})
-		const onChangeFBUrl = value => props.setAttributes({ facebookUrl: value })
 		const onChangeYTTrailerUrl = value => props.setAttributes({ youtubeTrailerUrl: value })
 		const onChangeYTFullLengthUrl = value => props.setAttributes({ youtubeFullLengthUrl: value })
 		const onChangeIndiegogo = value => props.setAttributes({ indiegogoAPI: value })
+
+		const onChangeFBUrl = function(value){
+
+			console.log(`Value is: ${value}`)
+			props.setAttributes({ facebookUrl: value })
+		}
 
 
 		const { attributes: { imgID, imgURL, imgAlt, imgID2, imgURL2, imgAlt2 },
@@ -206,8 +211,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 
 			const callIndieGoGoAPI = e => {
 				let api_token = "9986282a50bd2a3befe85098fe420f89c391d53f45812522cdab096f14618794"
-
-        		let access_token = "03403e8ccd70aee642eb6da1d501b19fefc622646c1a308289d9963b2cbcf921"
 								
 				//let campaignID = "2478659"
 				let campaignID = attributes.indiegogoAPI[0]
@@ -260,6 +263,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				id="prodFBEditor"
 				tagName="p"
 				placeholder={__("Facebook Page URL")}
+				label="Facebook Page URL"
 				value={attributes.facebookUrl}
 				onChange={onChangeFBUrl}
 				/>
@@ -288,7 +292,14 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				onChange={onChangeIndiegogo}
 				/>
 				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
-				<button onClick={callIndieGoGoAPI}>SUBMIT</button> <br />
+				<button
+				className="components-button button button-large" 
+				onClick={callIndieGoGoAPI}
+				>
+				{icons.submit}
+				&nbsp;
+				Submit Campaign 
+				</button>
 				
 				{ ! imgID ? (
 <MediaUpload
