@@ -11,9 +11,7 @@ import './editor.scss';
 import icons from './icons';
 
 //  Components
-import FacebookLogo from "../SharedComponents/FacebookLogo"
 import GalleryUpload from "../SharedComponents/GalleryUpload"
-import ShareLogo from "../SharedComponents/ShareLogo"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -457,8 +455,8 @@ className="prodImg"
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div className="fbAndshareIcons">
-					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a className="facebookUrl" href={`${facebookUrl}`} ><FacebookLogo/></a> : null}
-					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > <ShareLogo /> </a> : null}
+					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a className="facebookUrl" href={`${facebookUrl}`} > {icons.facebookLogo} </a> : null}
+					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > {icons.facebookShare} </a> : null}
 					<div id="fbLikeIframe"> {fbIframe} </div>
 					</div>
 				</div>
