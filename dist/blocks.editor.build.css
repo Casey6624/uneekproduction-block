@@ -13,6 +13,93 @@
 /* .wp-block-cgb-block-uneekproduction-block  {
 
 } */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300");
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+/* OUR CSS START*/
+#editContainerUneekProd {
+  background: #ff95b3;
+  border-radius: 10px;
+  display: grid; }
+
+#getStartedContainer {
+  padding-bottom: 10px;
+  background: #ff95b3;
+  border: 5px dotted #fff195;
+  border-radius: 10px;
+  padding: 5px; }
+
+#submitCancelIndieGoGo {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+#titleAndCreateSVG {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around; }
+
+#createSVGContainer {
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-animation: animatePen 2s 1s infinite;
+          animation: animatePen 2s 1s infinite; }
+
+#getStartedTitle {
+  font-family: 'Amatic SC', cursive;
+  font-size: 46px;
+  padding: 0px; }
+
+#getStartedBlurb {
+  font-family: 'Open Sans Condensed', sans-serif; }
+
+@-webkit-keyframes animatePen {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  10% {
+    -webkit-transform: scale(1.1, 0.9) translateY(0);
+            transform: scale(1.1, 0.9) translateY(0); }
+  30% {
+    -webkit-transform: scale(0.9, 1.1) translateY(-25px);
+            transform: scale(0.9, 1.1) translateY(-25px); }
+  50% {
+    -webkit-transform: scale(1.05, 0.95) translateY(0);
+            transform: scale(1.05, 0.95) translateY(0); }
+  57% {
+    -webkit-transform: scale(1, 1) translateY(-7px);
+            transform: scale(1, 1) translateY(-7px); }
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); } }
+
+@keyframes animatePen {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  10% {
+    -webkit-transform: scale(1.1, 0.9) translateY(0);
+            transform: scale(1.1, 0.9) translateY(0); }
+  30% {
+    -webkit-transform: scale(0.9, 1.1) translateY(-25px);
+            transform: scale(0.9, 1.1) translateY(-25px); }
+  50% {
+    -webkit-transform: scale(1.05, 0.95) translateY(0);
+            transform: scale(1.05, 0.95) translateY(0); }
+  57% {
+    -webkit-transform: scale(1, 1) translateY(-7px);
+            transform: scale(1, 1) translateY(-7px); }
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); }
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0); } }
+
 button.remove-image {
   background-color: #1e1e1e;
   border: 2px #1e1e1e solid;

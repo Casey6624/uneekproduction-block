@@ -8,6 +8,61 @@
 /* .wp-block-cgb-block-uneekproduction-block  {
 
 } */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+/* OUR CSS START*/
+
+#editContainerUneekProd{
+    background: #ff95b3;
+    border-radius: 10px;
+    display: grid;
+}
+
+ #getStartedContainer{
+    padding-bottom: 10px;
+    background: #ff95b3;
+    border:  5px dotted #fff195;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#submitCancelIndieGoGo{
+    display: flex;
+    justify-content: center;
+}
+
+#titleAndCreateSVG{
+    display: flex;
+    justify-content: space-around;
+}
+
+#createSVGContainer{
+    align-self: center;
+    animation: animatePen 2s 1s infinite;
+}
+
+#getStartedTitle{
+    font-family: 'Amatic SC', cursive;
+    font-size: 46px;
+    padding: 0px;
+}
+
+#getStartedBlurb{
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+@keyframes animatePen{
+        0%   { transform: scale(1,1)      translateY(0); }
+        10%  { transform: scale(1.1,.9)   translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-25px); }
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        57%  { transform: scale(1,1)      translateY(-7px); }
+        64%  { transform: scale(1,1)      translateY(0); }
+        100% { transform: scale(1,1)      translateY(0); }
+}
+
+// CSS for the upload image components
 
 button {
 
@@ -44,3 +99,5 @@ button {
 #mce_0{
     text-align: center;
 }
+
+// Upload components CSS end 

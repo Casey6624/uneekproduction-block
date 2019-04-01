@@ -259,11 +259,24 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			}
 			
 		return (
-			<div className={ className }>
+			<React.Fragment>
+			<div id="getStartedContainer">
+			<div id="titleAndCreateSVG">
+			<h3 id="getStartedTitle">Get Started Building. </h3>
+			<div id="createSVGContainer">{icons.create}</div>
+			</div>
+			
+			<strong>
+			<p id="getStartedBlurb">
+				Start adding production elements using the form below, only elements you add will be added to the front end.
+			</p>
+			</strong>
+		</div>
+			<div className={ className } id="editContainerUneekProd">
 				<RichText 
 				className="productionTitle"
 				id="prodTitleEditor"
-				tagName="h1"
+				tagName="p"
 				placeholder={__("Production Title")}
 				value={attributes.productionTitle}
 				onChange={onChangeProdTitle}
@@ -280,7 +293,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				className="facebookUrl"
 				id="prodFBEditor"
 				tagName="p"
-				placeholder={__("Enter Facebook Page name: E.g www.facebook.com/<THIS PART AFTER THE SLASH>")}
+				placeholder={__("Facebook Page name: E.g www.facebook.com/<THIS PART, AFTER THE SLASH>")}
 				label="Facebook Page URL"
 				value={attributes.facebookUrl}
 				multiline = { false }
@@ -306,33 +319,38 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				className="indiegogoAPI"
 				id="indiegogoAPI"
 				tagName="p"
-				placeholder={__("Please enter IndieGoGo Campaign ID")}
+				placeholder={__("IndieGoGo Campaign ID")}
 				value={attributes.indiegogoAPI}
 				multiline = { false }
 				onChange={onChangeIndiegogo}
 				/>
-				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
-				<button
-				className="components-button button button-large" 
-				onClick={callIndieGoGoAPI}
-				>
-				{icons.submit}
-				&nbsp;
-				Submit Campaign 
-				</button>
+				<div id="submitCancelIndieGoGo">
+					<button
+					className="components-button button button-large" 
+					onClick={callIndieGoGoAPI}
+					id="indieGoGoSubmit"
+					>
+					{icons.submit}
+					&nbsp;
+					Validate Campaign 
+					</button>
 
-				<button
-				className="components-button button button-large" 
-				onClick={clearIndieGoGoCampaignId}
-				>
-				{icons.bin}
-				&nbsp;
-				Remove Campaign 
-				</button>
-				
+					<button
+					className="components-button button button-large" 
+					onClick={clearIndieGoGoCampaignId}
+					id="indieGoGoCancel"
+					>
+					{icons.bin}
+					&nbsp;
+					Remove Campaign 
+					</button>
+				</div>
+
+				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
 				{ ! imgID ? (
 <MediaUpload
 className="prodImg"
+id="mediaUploadBtn1"
 	onSelect={ onSelectImage }
 	type="image"
 	value={ imgID }
@@ -373,6 +391,7 @@ className="prodImg"
 { ! imgID2 ? (
 	<MediaUpload
 	className="prodImg"
+	id="mediaUploadBtn2"
 		onSelect={ onSelectImage2 }
 		type="image"
 		value={ imgID2 }
@@ -409,8 +428,8 @@ className="prodImg"
 	
 	</p>
 	)}
-
 			</div>
+			</React.Fragment>
 		);
 	},
 
@@ -468,6 +487,7 @@ className="prodImg"
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 			{indiegogoFull}
 		</div>
+		
 		);
 		
 	},
