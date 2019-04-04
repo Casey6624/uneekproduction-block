@@ -101,8 +101,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 		// Campaign ID
 		indiegogoAPI: {
 			type: "string",
-			default: "",
-			source: "html",
+			source: "children",
 			selector: ".indiegogoAPI"
 		},
 		// Success / Error Message in the editor
@@ -213,12 +212,12 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
                 });
 			}
 
-			const clearIndieGoGoCampaignId = () => {
+			/* const clearIndieGoGoCampaignId = () => {
 				setAttributes({
 					indiegogoAPI: "",
 					indieGoGoErrorOrSuccess: null
 				})
-			}
+			} */
 
 			const callIndieGoGoAPI = () => {
 				let api_token = "9986282a50bd2a3befe85098fe420f89c391d53f45812522cdab096f14618794"
@@ -252,7 +251,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			}
 			
 		return (
-			<div>
+			<React.Fragment>
 			<div id="getStartedContainer">
 			<div id="titleAndCreateSVG">
 			<h3 id="getStartedTitle">Get Started Building. </h3>
@@ -328,7 +327,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 					Validate Campaign 
 					</button>
 
-					<button
+					{/* <button
 					className="components-button button button-large" 
 					onClick={clearIndieGoGoCampaignId}
 					id="indieGoGoCancel"
@@ -336,7 +335,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 					{icons.bin}
 					&nbsp;
 					Remove Campaign 
-					</button>
+					</button> */}
 				</div>
 
 				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
@@ -422,7 +421,7 @@ id="mediaUploadBtn1"
 	</p>
 	)}
 			</div>
-			</div>
+			</React.Fragment>
 		);
 	},
 
@@ -445,7 +444,7 @@ id="mediaUploadBtn1"
 		let fbIframe = <iframe src={iframeSource} width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 
 		return (
-			<div className="productionContainer">
+			<div>
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div id="filmSVGContainer">{icons.film}</div>
@@ -455,6 +454,7 @@ id="mediaUploadBtn1"
 					<div id="fbLikeIframe"> {fbIframe} </div>
 					</div>
 				</div>
+				<p>{indiegogoAPI}</p>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
 				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />

@@ -4,3 +4,138 @@
  * CSS for both Frontend+Backend.
  */
 
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+
+ #filmSVGContainer{
+    animation: animateFilmReel 2s 1s infinite;
+ }
+
+ @keyframes animateFilmReel{
+    0%   { transform: scale(1,1)      translateY(0); }
+    10%  { transform: scale(1.1,.9)   translateY(0); }
+    30%  { transform: scale(.9,1.1)   translateY(-15px); }
+    50%  { transform: scale(1.05,.95) translateY(0); }
+    57%  { transform: scale(1,1)      translateY(-7px); }
+    64%  { transform: scale(1,1)      translateY(0); }
+    100% { transform: scale(1,1)      translateY(0); }
+}
+
+.productionContainer{
+   background: #ff95b3;
+   display: grid;
+   width: 100%;
+   padding: 15px;
+   animation: containerFrames 2s ease-in-out 0s forwards 1;
+}
+
+#productionTitle{
+   font-family: 'Amatic SC', cursive;
+   font-size: 5.5rem;
+   line-height: normal;
+}
+
+.title{
+   border-radius: 15px;
+   padding: 1.2rem;
+   width: fit-content; 
+   display: table;
+}
+
+#productionDescription{
+   font-family: 'Open Sans Condensed', sans-serif;
+   font-size: 2rem;
+   line-height: normal;
+   color: #1e1e1e;
+}
+
+.web_url button{
+   font-family: 'Amatic SC', cursive; 
+    transition: background 150ms ease-in-out;
+    background: #1e1e1e;
+    border: none; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    color: #fff; 
+    font-size: 1.8em; 
+    font-weight: 700; 
+    line-height: 1.2; 
+    outline: none; 
+    padding: 1rem 1rem;
+    text-decoration: none; 
+    vertical-align: bottom; 
+}
+
+.web_url button:hover{
+    background: #fff195;
+    cursor: pointer;
+    color: #1e1e1e;
+}
+
+.productionContainer h2{
+   font-family: 'Amatic SC', cursive;
+   font-size: 3rem;
+   background: #fff195;
+   padding: 2px;
+   margin: 1.5rem;
+   width: fit-content; 
+   display: table;
+}
+
+@keyframes containerFrames{
+
+   25%{
+       background: #95d1ff;
+       color: #1e1e1e;
+       padding: 15px;
+       margin: 5px;
+       border-radius: 0px;
+   }
+
+   50%{
+       background: #fff195;
+       color: #1e1e1e;
+       padding: 15px;
+       margin: 5px;
+       border: 20px dashed #95d1ff;
+   }
+
+   80%{
+       opacity: 0.8;
+       padding: 15px;
+       background: #ff95b3;
+       color: #f2f2f2;
+       border: 20px solid #1e1e1e;
+   }
+
+   100%{
+       color: #f2f2f2;
+       opacity: 1;
+       padding: 15px;
+       background: #ff95b3;
+       border: 20px solid #1e1e1e;
+   }
+}
+
+.indieGoGo{
+   background: #95d1ff;
+   padding: 1rem;
+   margin: 1rem;
+}
+
+.imageAndTagline{
+   display: flex;
+   justify-content: space-between;
+}
+
+.tagline{
+   color: #1e1e1e;
+   font-family: 'Open Sans Condensed', sans-serif;
+   font-size: 2rem;
+   line-height: normal;
+}
+
+.textAndButton{
+   padding: 5px;
+}
