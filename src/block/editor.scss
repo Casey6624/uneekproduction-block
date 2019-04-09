@@ -34,6 +34,14 @@
     text-align: center;
 }
 
+.indieGoGoErrorOrSuccess{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 3rem;
+    background:  $blue;
+    font-weight: bold;
+    text-align: center;
+}
+
 #submitCancelIndieGoGo{
     display: flex;
     justify-content: center;

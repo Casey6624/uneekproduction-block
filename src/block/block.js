@@ -234,7 +234,9 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 								
 				//let campaignID = "2478659"
 				let campaignID = attributes.indiegogoAPI
-				let api_url = `https://api.indiegogo.com/1/campaigns/${campaignID}.json?api_token=${api_token}`
+
+				if(campaignID != ""){
+					let api_url = `https://api.indiegogo.com/1/campaigns/${campaignID}.json?api_token=${api_token}`
 		
 				fetch(api_url)
 				.then(res => res.json())
@@ -256,6 +258,9 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				.catch(error => {
 					console.log(`API Error! ${error}`)
                 })
+				}else{
+					setAttributes({indieGoGoErrorOrSuccess: `No Campaign ID Entered! Please enter an ID`})
+				}
 					
 				
 			}
