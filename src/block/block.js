@@ -458,7 +458,7 @@ id="mediaUploadBtn1"
 				<div className="titleAndFBLink">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div id="filmSVGContainer">{icons.film}</div>
-					<div className="fbAndshareIcons">
+					<div className="fbAndshareIcons" style={{ display: facebookUrl == "" || facebookUrl == facebookRootUrl ? "none" : "" }}>
 					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a className="facebookUrl" href={`${facebookUrl}`} > {icons.facebookLogo} </a> : null}
 					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > {icons.facebookShare} </a> : null}
 					<div id="fbLikeIframe"> {fbIframe} </div>
@@ -471,7 +471,7 @@ id="mediaUploadBtn1"
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 			
-			<div className="indieGoGo">
+			<div className="indieGoGo" style={{ display: title.length == 0 ? "none" : "" }}>
 			<h1 className="indieGoGoTitle">Support This Production On Indiegogo!</h1>
 			<h2 className="title">{title}</h2>
 			<p className="fundProgress">{fundProgress}</p>
