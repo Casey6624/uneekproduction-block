@@ -218,7 +218,13 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			const clearIndieGoGoCampaignId = () => {
 				setAttributes({
 					indiegogoAPI: "",
-					indieGoGoErrorOrSuccess: null
+					indieGoGoErrorOrSuccess: null,
+					fundProgress: null, 
+					funding_ends_at: null, 
+					image_types: null, 
+					title: null, 
+					tagline: null, 
+					web_url: null
 				})
 			}
 
