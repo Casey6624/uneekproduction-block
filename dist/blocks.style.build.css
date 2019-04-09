@@ -74,6 +74,16 @@
   font-size: 5.5rem;
   line-height: normal; }
 
+.indieGoGoTitle {
+  font-family: 'Amatic SC', cursive;
+  font-size: 3rem;
+  line-height: normal;
+  text-align: center;
+  background: #fff195;
+  display: table;
+  font-weight: bold;
+  padding: 0 1rem 0 1rem; }
+
 /* Title For Indiegogo*/
 .title {
   padding: 2.5rem;
@@ -81,6 +91,18 @@
   width: -moz-fit-content;
   width: fit-content;
   display: table; }
+
+.titleAndFilmSVG {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center; }
+
+.fbAndshareIcons {
+  display: -ms-flexbox;
+  display: flex; }
 
 #productionDescription {
   color: #1e1e1e;

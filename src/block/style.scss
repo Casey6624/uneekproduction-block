@@ -30,10 +30,24 @@
    animation: containerFrames 2s ease-in-out 0s forwards 1;
 }
 
+
+// I.E FIGHTCLUB
+
 #productionTitle{
    font-family: 'Amatic SC', cursive;
    font-size: 5.5rem;
    line-height: normal;
+}
+
+.indieGoGoTitle{
+   font-family: 'Amatic SC', cursive;
+   font-size: 3rem;
+   line-height: normal;
+   text-align: center;
+   background: $yellow;
+   display: table;
+   font-weight: bold;
+   padding: 0 1rem 0 1rem;
 }
 
 /* Title For Indiegogo*/
@@ -41,6 +55,16 @@
    padding: 2.5rem;
    width: fit-content; 
    display: table;
+}
+
+.titleAndFilmSVG{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.fbAndshareIcons{
+   display: flex;
 }
 
 #productionDescription{
@@ -75,7 +99,7 @@
 }
 
 .web_url button:hover{
-    background: #fff195;
+    background: $yellow;
     cursor: pointer;
     color: #1e1e1e;
 }
@@ -83,7 +107,7 @@
 .productionContainer h2{
    font-family: 'Amatic SC', cursive;
    font-size: 3rem;
-   background: #fff195;
+   background: $yellow;
    padding: 2px;
    margin: 1.5rem;
    width: fit-content; 
@@ -93,7 +117,7 @@
 @keyframes containerFrames{
 
    25%{
-       background: #95d1ff;
+       background: $blue;
        color: #1e1e1e;
        padding: 15px;
        margin: 5px;
@@ -101,11 +125,11 @@
    }
 
    50%{
-       background: #fff195;
+       background: $yellow;
        color: #1e1e1e;
        padding: 15px;
        margin: 5px;
-       border: 20px dashed #95d1ff;
+       border: 20px dashed $blue;
    }
 
    80%{
@@ -126,7 +150,7 @@
 }
 
 .indieGoGo{
-   background: #95d1ff;
+   background: $blue;
    padding: 1rem;
    margin: 1rem;
 }

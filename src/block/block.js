@@ -455,14 +455,14 @@ id="mediaUploadBtn1"
 
 		return (
 			<div className="productionContainer">
-				<div className="titleAndFBLink">
+				<div className="titleAndFilmSVG">
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div id="filmSVGContainer">{icons.film}</div>
+					</div>
 					<div className="fbAndshareIcons" style={{ display: facebookUrl == "" || facebookUrl == facebookRootUrl ? "none" : "" }}>
 					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a className="facebookUrl" href={`${facebookUrl}`} > {icons.facebookLogo} </a> : null}
 					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > {icons.facebookShare} </a> : null}
 					<div id="fbLikeIframe"> {fbIframe} </div>
-					</div>
 				</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
 			<hr />
