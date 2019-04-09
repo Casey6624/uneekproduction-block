@@ -12,6 +12,7 @@ import icons from './icons';
 
 //  Components
 import GalleryUpload from "../SharedComponents/GalleryUpload"
+import indiegogoProgress from "../SharedComponents/IndiegogoProgress"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -274,58 +275,65 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			</strong>
 		</div>
 			<div className={ className } id="editContainerUneekProd">
+			<p class="editorHelpers"> Production Title </p>
 				<RichText 
 				className="productionTitle"
 				id="prodTitleEditor"
 				tagName="p"
-				placeholder={__("Production Title")}
+				placeholder={__("E.g Fight Club")}
 				value={attributes.productionTitle}
 				onChange={onChangeProdTitle}
 				/>
+				<p class="editorHelpers"> Production Description </p>
 				<RichText 
 				className="productionDescription"
 				id="prodDescEditor"
 				tagName="p"
-				placeholder={__("Production Description")}
+				placeholder={__("E.g A depressed man (Edward Norton) suffering from insomnia meets a strange soap salesman...")}
 				value={attributes.productionDescription}
 				onChange={onChangeProdDescription}
 				/>
+				<p class="editorHelpers"> Facebook Page Name </p>
 				<RichText 
 				className="facebookUrl"
 				id="prodFBEditor"
 				tagName="p"
-				placeholder={__("Facebook Page name: E.g www.facebook.com/<THIS PART, AFTER THE SLASH>")}
+				placeholder={__("E.g www.facebook.com/<THIS PART, AFTER THE SLASH>")}
 				onfocus="this.value = this.value;"
 				label="Facebook Page URL"
 				value={attributes.facebookUrl}
 				multiline = { false }
 				onChange={onChangeFBUrl}
 				/>
+				<p class="editorHelpers"> Youtube Trailer URL</p>
 				<RichText 
 				className="youtubeTrailerUrl"
 				id="prodYTEditor"
 				tagName="p"
-				placeholder={__("YouTube Pilot URL")}
+				placeholder={__("E.g https://www.youtube.com/watch?v=mCg")}
 				value={attributes.youtubeTrailerUrl}
 				onChange={onChangeYTTrailerUrl}
 				/>
+				<p class="editorHelpers"> Youtube Full Length URL</p>
 				<RichText 
 				className="youtubeFullLengthUrl"
 				id="prodYTEditor"
 				tagName="p"
-				placeholder={__("YouTube Full Length URL")}
+				placeholder={__("E.g https://www.youtube.com/watch?v=mCg")}
 				value={attributes.youtubeFullLengthUrl}
 				onChange={onChangeYTFullLengthUrl}
 				/>
+				<p class="editorHelpers"> Indiegogo Campaign ID</p>
 				<RichText 
 				className="indiegogoAPI"
 				id="indiegogoAPI"
 				tagName="p"
-				placeholder={__("IndieGoGo Campaign ID")}
+				placeholder={__("Find this inside the indiegogo dashboard")}
 				value={attributes.indiegogoAPI}
 				multiline = { false }
 				onChange={onChangeIndiegogo}
 				/>
+				<p class="editorHelpers"> Submit/Delete an Indiegogo campaign</p>
 				<div id="submitCancelIndieGoGo">
 					<button
 					className="components-button button button-large" 
@@ -348,7 +356,9 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 					</button>
 				</div>
 
-				<p className="indieGoGoErrorOrSuccess">{attributes.indieGoGoErrorOrSuccess}</p>
+				<p className="indieGoGoErrorOrSuccess"
+				style={{ display: attributes.indieGoGoErrorOrSuccess.length == 0 ? "none" : "" }}
+				>{attributes.indieGoGoErrorOrSuccess}</p>
 				{ ! imgID ? (
 <MediaUpload
 className="prodImg"
@@ -459,7 +469,7 @@ id="mediaUploadBtn1"
 					<div className="productionTitle" id="productionTitle"> {productionTitle}</div>
 					<div id="filmSVGContainer">{icons.film}</div>
 					</div>
-					<div className="fbAndshareIcons" style={{ display: facebookUrl == "" || facebookUrl == facebookRootUrl ? "none" : "" }}>
+					<div className="fbAndshareIcons" style={{ display: facebookUrl == "" || facebookUrl == facebookRootUrl ? "none" : "flex" }}>
 					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a className="facebookUrl" href={`${facebookUrl}`} > {icons.facebookLogo} </a> : null}
 					{facebookUrl != facebookRootUrl || facebookUrl != "" ? <a href={`https://www.facebook.com/sharer/sharer.php?u=${`${facebookUrl}`}`} > {icons.facebookShare} </a> : null}
 					<div id="fbLikeIframe"> {fbIframe} </div>
@@ -485,7 +495,7 @@ id="mediaUploadBtn1"
 			</div>
 		</div>
 		</div>
-		
+		//let campaignID = "2478659"
 		);
 		
 	},

@@ -27,9 +27,17 @@
     padding: 5px;
 }
 
+.editorHelpers{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+}
+
 #submitCancelIndieGoGo{
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
 #titleAndCreateSVG{
