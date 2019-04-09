@@ -167,16 +167,18 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 
 		const onChangeFBUrl = function(value){
 
-			value = value.trim()
+			if(value.includes(" ")){
+				value = value.trim()
+			}
 
 			// Here we need to check if facebook root URL has been appended yet, if it hasn't add it, if it has then skip adding it
 			if(value.includes("https://www.facebook.com/") && value != ""){{
-				props.setAttributes({ facebookUrl: value })
+				setAttributes({ facebookUrl: value })
 			}}else if(!value.includes("https://www.facebook.com/" && value != "")){
 				value = `https://www.facebook.com/${value}`
-				props.setAttributes({ facebookUrl: value })
+				setAttributes({ facebookUrl: value })
 			}else{
-				props.setAttributes({ facebookUrl: value })
+				setAttributes({ facebookUrl: value })
 			}
 		}
 
@@ -235,12 +237,12 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 						setAttributes({indieGoGoErrorOrSuccess: `Oops! Couldn't find that campaign. Recieved Error: ${data.error}`})
                     	return Promise.reject()
 					}else{
-						let { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url } = data.response
+						let { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url, team_members } = data.response
 
 						image_types = image_types.baseball_card
 
 						let fundProgress = `We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`
-						setAttributes({indieGoGoErrorOrSuccess: "Valid campaign found!", fundProgress, funding_ends_at, image_types, title, tagline, web_url})
+						setAttributes({indieGoGoErrorOrSuccess: `Valid campaign found! ${title} by ${team_members[0].name}` , fundProgress, funding_ends_at, image_types, title, tagline, web_url})
 					}
 					
 				}) 
@@ -287,6 +289,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				id="prodFBEditor"
 				tagName="p"
 				placeholder={__("Facebook Page name: E.g www.facebook.com/<THIS PART, AFTER THE SLASH>")}
+				onfocus="this.value = this.value;"
 				label="Facebook Page URL"
 				value={attributes.facebookUrl}
 				multiline = { false }
@@ -456,13 +459,14 @@ id="mediaUploadBtn1"
 					</div>
 				</div>
 			<div className="productionDescription" id="productionDescription"> {productionDescription}</div>
+			<hr />
 				<img id="artworkContainer" className="prodImg" src={ imgURL } alt={ imgAlt } />
 				<img id="artworkContainer" className="prodImg2" src={ imgURL2 } alt={ imgAlt2 } />
 			{youtubeTrailerUrl ? <h2>TRAILER: </h2> : null} <p className="youtubeTrailerUrl">{youtubeTrailerUrl}</p>
 			{youtubeFullLengthUrl ? <h2>FULL LENGTH FEATURE: </h2> : null} <p className="youtubeFullLengthUrl">{youtubeFullLengthUrl}</p>
 			
 			<div className="indieGoGo">
-			<h1 className="indieGoGoTitle">INDIEGOGO</h1>
+			<h1 className="indieGoGoTitle">Support This Production On Indiegogo!</h1>
 			<h2 className="title">{title}</h2>
 			<p className="fundProgress">{fundProgress}</p>
 			<div className="imageAndTagline">

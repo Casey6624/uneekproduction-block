@@ -36,18 +36,25 @@
    line-height: normal;
 }
 
+/* Title For Indiegogo*/
 .title{
-   border-radius: 15px;
-   padding: 1.2rem;
+   padding: 2.5rem;
    width: fit-content; 
    display: table;
 }
 
 #productionDescription{
+   color: #1e1e1e;
    font-family: 'Open Sans Condensed', sans-serif;
    font-size: 2rem;
    line-height: normal;
-   color: #1e1e1e;
+}
+
+.fundProgress{
+       color: #1e1e1e;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 2rem;
+    line-height: normal;
 }
 
 .web_url button{
