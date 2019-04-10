@@ -232,6 +232,9 @@
   -ms-flex-pack: center;
       justify-content: center; }
 
+#artworkContainer {
+  margin: 1rem auto; }
+
 .prodImg, .prodImg2 {
   width: 50vh; }
 
