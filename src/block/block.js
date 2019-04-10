@@ -9,6 +9,7 @@
 import './style.scss';
 import './editor.scss';
 import icons from './icons';
+import moment from "moment"
 
 //  Components
 import GalleryUpload from "../SharedComponents/GalleryUpload"
@@ -167,9 +168,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 
 		const onChangeFBUrl = function(value){
 
-			if(value.includes(" ")){
-				value = value.trim()
-			}
+			if(value.includes(" "))value = value.trim()
 
 			// Here we need to check if facebook root URL has been appended yet, if it hasn't add it, if it has then skip adding it
 			if(value.includes("https://www.facebook.com/") && value != ""){{
@@ -248,6 +247,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 						let { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url, team_members } = data.response
 
 						image_types = image_types.baseball_card
+
+						funding_ends_at = `Campaign Ends on ${moment(funding_ends_at).format('lll')}`
 
 						let fundProgress = `We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`
 						setAttributes({indieGoGoErrorOrSuccess: `Valid campaign found! ${title} by ${team_members[0].name}` , fundProgress, funding_ends_at, image_types, title, tagline, web_url})
