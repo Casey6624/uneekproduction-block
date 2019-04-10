@@ -18,7 +18,6 @@
 /* OUR CSS START*/
 #editContainerUneekProd {
   background: #ff95b3;
-  border-radius: 10px;
   display: grid; }
 
 #getStartedContainer {
@@ -32,7 +31,8 @@
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: bold;
   font-size: 2rem;
-  text-align: center; }
+  text-align: center;
+  text-transform: uppercase; }
 
 .indieGoGoErrorOrSuccess {
   font-family: 'Open Sans Condensed', sans-serif;
@@ -67,6 +67,11 @@
 
 #getStartedBlurb {
   font-family: 'Open Sans Condensed', sans-serif; }
+
+#indiegogoEditorOptions {
+  background: #95d1ff;
+  border: 5px dotted #fff195;
+  border-radius: 10px; }
 
 @-webkit-keyframes animatePen {
   0% {
@@ -132,6 +137,8 @@ button.remove-image {
   border: 0.5px solid black;
   margin: 10px;
   padding: 5px;
+  font-family: 'Open Sans Condensed';
+  font-size: 1.2rem;
   border-radius: 10px; }
 
 #mce_0 {

@@ -220,7 +220,8 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 					image_types: "", 
 					title: [], 
 					tagline: [], 
-					web_url: ""
+					web_url: "",
+					authorUrlAndName: []
 				})
 			}
 
@@ -284,7 +285,7 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			</strong>
 		</div>
 			<div className={ className } id="editContainerUneekProd">
-			<p class="editorHelpers"> Production Title </p>
+			<p class="editorHelpers"> PRODUCTION TITLE </p>
 				<RichText 
 				className="productionTitle"
 				id="prodTitleEditor"
@@ -332,12 +333,17 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				value={attributes.youtubeFullLengthUrl}
 				onChange={onChangeYTFullLengthUrl}
 				/>
+				<div id="indiegogoEditorOptions">
+				<h1 id="linkIndiegogoTitle">LINK AN INDIEGOGO CAMPAIGN</h1>
+				<p id="linkIndiegogoBlurb">
+					Copy and paste the indiegogo Campaign ID from the Indiegogo dashboard into the text box below. Once inputted, hit the validate campaign button.
+				</p>
 				<p class="editorHelpers"> Indiegogo Campaign ID</p>
 				<RichText 
 				className="indiegogoAPI"
 				id="indiegogoAPI"
 				tagName="p"
-				placeholder={__("Find this inside the indiegogo dashboard")}
+				placeholder={__("My Campaigns > Campaign ID E.g 2478659")}
 				value={attributes.indiegogoAPI}
 				multiline = { false }
 				onChange={onChangeIndiegogo}
@@ -368,6 +374,12 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 				<p className="indieGoGoErrorOrSuccess"
 				style={{ display: attributes.indieGoGoErrorOrSuccess.length == 0 ? "none" : "" }}
 				>{attributes.indieGoGoErrorOrSuccess}</p>
+				</div>
+
+			<h1 id="linkIndiegogoTitle">
+				Add Behind The Scene Images
+			</h1>
+
 				{ ! imgID ? (
 <MediaUpload
 className="prodImg"

@@ -15,7 +15,6 @@
 
 #editContainerUneekProd{
     background: #ff95b3;
-    border-radius: 10px;
     display: grid;
 }
 
@@ -32,6 +31,7 @@
     font-weight: bold;
     font-size: 2rem;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .indieGoGoErrorOrSuccess{
@@ -66,6 +66,12 @@
 
 #getStartedBlurb{
     font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#indiegogoEditorOptions{
+    background: $blue;
+    border: 5px dotted #fff195;
+    border-radius: 10px;
 }
 
 @keyframes animatePen{
@@ -109,6 +115,8 @@ button {
     border: 0.5px solid black;
     margin: 10px;
     padding: 5px;
+    font-family: 'Open Sans Condensed';
+    font-size: 1.2rem;
     border-radius: 10px;
 }
 
