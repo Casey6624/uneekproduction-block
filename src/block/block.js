@@ -12,7 +12,6 @@ import icons from './icons';
 
 //  Components
 import GalleryUpload from "../SharedComponents/GalleryUpload"
-import indiegogoProgress from "../SharedComponents/IndiegogoProgress"
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -219,13 +218,13 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			const clearIndieGoGoCampaignId = () => {
 				setAttributes({
 					indiegogoAPI: "",
-					indieGoGoErrorOrSuccess: null,
-					fundProgress: null, 
-					funding_ends_at: null, 
-					image_types: null, 
-					title: null, 
-					tagline: null, 
-					web_url: null
+					indieGoGoErrorOrSuccess: [],
+					fundProgress: [], 
+					funding_ends_at: [], 
+					image_types: "", 
+					title: [], 
+					tagline: [], 
+					web_url: ""
 				})
 			}
 
