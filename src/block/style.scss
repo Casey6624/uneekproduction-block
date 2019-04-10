@@ -81,7 +81,7 @@
     line-height: normal;
 }
 
-.web_url button{
+.web_url button, #viewAuthorProfile{
    font-family: 'Amatic SC', cursive; 
     transition: background 150ms ease-in-out;
     background: #1e1e1e;
@@ -96,12 +96,18 @@
     padding: 1rem 1rem;
     text-decoration: none; 
     vertical-align: bottom; 
+    display: table;
+    margin: 0 1rem 0 0;
 }
 
-.web_url button:hover{
+.web_url button:hover, #viewAuthorProfile:hover{
     background: $yellow;
     cursor: pointer;
     color: #1e1e1e;
+}
+
+.viewProjectAuthorContainer{
+   display: flex;
 }
 
 .productionContainer h2{
@@ -174,7 +180,7 @@
    width: 50vh;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1050px) {
    .imageAndTagline{
       display: block;
    }

@@ -118,12 +118,6 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			source: "children",
 			selector: ".title"
 		},
-		fundProgress: {
-			type: "array",
-			source: "children",
-			selector: ".fundProgress"
-		},
-		
 		funding_ends_at: {
 			type: "array",
 			source: "children",
@@ -145,6 +139,9 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 			source: 'attribute',
 			attribute: 'src',
 			selector: ".image_types"
+		},
+		authorUrlAndName:{
+			type: "array"
 		}
 	},
 	
@@ -244,14 +241,21 @@ registerBlockType( 'cgb/block-uneekproduction-block', {
 						setAttributes({indieGoGoErrorOrSuccess: `Oops! Couldn't find that campaign. Recieved Error: ${data.error}`})
                     	return Promise.reject()
 					}else{
-						let { collected_funds, goal, funding_ends_at, currency, image_types, title, tagline, web_url, team_members } = data.response
+						let { funding_ends_at, image_types, title, tagline, web_url, team_members, account_id } = data.response
 
 						image_types = image_types.baseball_card
 
+						// here we combine Author Name and Author Profile URL into an array. We do this so we can show the details inside the indiegogo widget
+						let authorUrlAndName = []
+						if(account_id && team_members){
+							authorUrlAndName.push(`https://www.indiegogo.com/individuals/${account_id}`)
+							authorUrlAndName.push(team_members[0].name)
+						}
+
+						// format the date using momentJS. Date format is: May 7, 2019 7:59 AM
 						funding_ends_at = `Campaign Ends on ${moment(funding_ends_at).format('lll')}`
 
-						let fundProgress = `We have raised ${currency.symbol}${collected_funds} of our goal ${currency.symbol}${goal}`
-						setAttributes({indieGoGoErrorOrSuccess: `Valid campaign found! ${title} by ${team_members[0].name}` , fundProgress, funding_ends_at, image_types, title, tagline, web_url})
+						setAttributes({indieGoGoErrorOrSuccess: `Valid campaign found! ${title} by ${team_members[0].name}` , authorUrlAndName, funding_ends_at, image_types, title, tagline, web_url})
 					}
 					
 				}) 
@@ -460,9 +464,11 @@ id="mediaUploadBtn1"
 	 */
 	save: props =>{
 
-		let { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, fundProgress, funding_ends_at, currency, image_types, title, tagline, web_url, indiegogoAPI } = props.attributes
+		let { imgURL, imgAlt, imgURL2, imgAlt2, productionTitle, productionDescription, facebookUrl, youtubeTrailerUrl, youtubeFullLengthUrl, funding_ends_at, currency, image_types, title, tagline, web_url, indiegogoAPI, authorUrlAndName } = props.attributes
 
 		let facebookRootUrl = "https://www.facebook.com/"
+
+		let [authorUrl, authorName] = authorUrlAndName
 
 		let iframeSource = `https://www.facebook.com/plugins/like.php?href=${facebookUrl}&width=450&layout=standard&action=like&size=small&show_faces=true&share=false&height=80&appId`
 
@@ -489,12 +495,14 @@ id="mediaUploadBtn1"
 			<div className="indieGoGo" style={{ display: title.length == 0 ? "none" : "" }}>
 			<h1 className="indieGoGoTitle">Support This Production On Indiegogo!</h1>
 			<h2 className="title">{title}</h2>
-			<p className="fundProgress">{fundProgress}</p>
 			<div className="imageAndTagline">
 			<img className="image_types" src={image_types}/>
 				<div className="textAndButton">
 					<p className="tagline">{tagline}</p>
-					<a className="web_url" href={`${web_url}`}> <button>VIEW ON INDIEGOGO</button></a>
+					<div className="viewProjectAuthorContainer">
+						<a className="web_url" href={`${web_url}`}> <button>VIEW PROJECT</button></a>
+						<a href={`${authorUrl}`}> <p id="viewAuthorProfile"> View Author ({authorName}) </p> </a>
+					</div>
 					<p className="funding_ends_at">{funding_ends_at}</p>
 				</div>
 			</div>

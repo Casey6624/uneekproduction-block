@@ -116,7 +116,7 @@
   font-size: 2rem;
   line-height: normal; }
 
-.web_url button {
+.web_url button, #viewAuthorProfile {
   font-family: 'Amatic SC', cursive;
   -webkit-transition: background 150ms ease-in-out;
   -o-transition: background 150ms ease-in-out;
@@ -133,12 +133,18 @@
   outline: none;
   padding: 1rem 1rem;
   text-decoration: none;
-  vertical-align: bottom; }
+  vertical-align: bottom;
+  display: table;
+  margin: 0 1rem 0 0; }
 
-.web_url button:hover {
+.web_url button:hover, #viewAuthorProfile:hover {
   background: #fff195;
   cursor: pointer;
   color: #1e1e1e; }
+
+.viewProjectAuthorContainer {
+  display: -ms-flexbox;
+  display: flex; }
 
 .productionContainer h2 {
   font-family: 'Amatic SC', cursive;
@@ -229,7 +235,7 @@
 .prodImg, .prodImg2 {
   width: 50vh; }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1050px) {
   .imageAndTagline {
     display: block; }
   .image_types img {
