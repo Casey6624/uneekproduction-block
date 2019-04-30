@@ -148,7 +148,7 @@ registerBlockType("cgb/block-uneekproduction-block", {
    *
    * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
    */
-  edit: function(props) {
+  edit: function (props) {
     const { attributes, setAttributes } = props;
     // Change Handlers
     const onChangeProdTitle = value =>
@@ -162,7 +162,7 @@ registerBlockType("cgb/block-uneekproduction-block", {
 
     const onChangeIndiegogo = value => setAttributes({ indiegogoAPI: value });
 
-    const onChangeFBUrl = function(value) {
+    const onChangeFBUrl = function (value) {
       if (value.includes(" ")) value = value.trim();
 
       // Here we need to check if facebook root URL has been appended yet, if it hasn't add it, if it has then skip adding it
@@ -245,7 +245,7 @@ registerBlockType("cgb/block-uneekproduction-block", {
               setAttributes({
                 indieGoGoErrorOrSuccess: `Oops! Couldn't find that campaign. Recieved Error: ${
                   data.error
-                }`
+                  }`
               });
               return Promise.reject();
             } else {
@@ -278,7 +278,7 @@ registerBlockType("cgb/block-uneekproduction-block", {
               setAttributes({
                 indieGoGoErrorOrSuccess: `Valid campaign found! ${title} by ${
                   team_members[0].name
-                }`,
+                  }`,
                 authorUrlAndName,
                 funding_ends_at,
                 image_types,
@@ -431,16 +431,16 @@ registerBlockType("cgb/block-uneekproduction-block", {
               )}
             />
           ) : (
-            <p class="image-wrapper">
-              <img src={imgURL} alt={imgAlt} />
+              <p class="image-wrapper">
+                <img src={imgURL} alt={imgAlt} />
 
-              {isSelected ? (
-                <Button className="remove-image" onClick={onRemoveImage}>
-                  {icons.remove}
-                </Button>
-              ) : null}
-            </p>
-          )}
+                {isSelected ? (
+                  <Button className="remove-image" onClick={onRemoveImage}>
+                    {icons.remove}
+                  </Button>
+                ) : null}
+              </p>
+            )}
 
           {!imgID2 ? (
             <MediaUpload
@@ -457,16 +457,16 @@ registerBlockType("cgb/block-uneekproduction-block", {
               )}
             />
           ) : (
-            <p class="image-wrapper">
-              <img src={imgURL2} alt={imgAlt2} />
+              <p class="image-wrapper">
+                <img src={imgURL2} alt={imgAlt2} />
 
-              {isSelected ? (
-                <Button className="remove-image" onClick={onRemoveImage2}>
-                  {icons.remove}
-                </Button>
-              ) : null}
-            </p>
-          )}
+                {isSelected ? (
+                  <Button className="remove-image" onClick={onRemoveImage2}>
+                    {icons.remove}
+                  </Button>
+                ) : null}
+              </p>
+            )}
         </div>
       </div>
     );
@@ -503,7 +503,11 @@ registerBlockType("cgb/block-uneekproduction-block", {
 
     let facebookRootUrl = "https://www.facebook.com/";
 
-    let [authorUrl, authorName] = authorUrlAndName;
+    let authorUrl = null; let authorName = null;
+
+    if (authorUrlAndName != null && authorUrlAndName.length > 0) {
+      let [authorUrl, authorName] = authorUrlAndName;
+    }
 
     let iframeSource = `https://www.facebook.com/plugins/like.php?href=${facebookUrl}&width=450&layout=standard&action=like&size=small&show_faces=true&share=false&height=80&appId`;
 
